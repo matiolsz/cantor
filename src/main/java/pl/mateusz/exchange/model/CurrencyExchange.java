@@ -1,53 +1,44 @@
-package pl.mateusz.currencyexchangeservice.model;
+package pl.mateusz.exchange.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
-public class CurrencyExchange { //FIXME equals/hashcode wywalic settery
+public class CurrencyExchange {
 
-    //FIXME
     @Id
+    @GeneratedValue
     private Long id;
 
-    @Column(name = "currency_from")//FIXME
-    private String from;
+    private String currencyFrom;
 
-    @Column(name = "currency_to")//FIXME
-    private String to;
+    private String currencyTo;
 
-    private BigDecimal conversionMultiple;//FIXME co to za nazwa?
+    private BigDecimal currencyMultiplier;
 
-    private String environment;
-
-    public CurrencyExchange(String from, String to, BigDecimal conversionMultiple, String environment) {
-        this.from = from;
-        this.to = to;
-        this.conversionMultiple = conversionMultiple;
-        this.environment = environment;
+    public CurrencyExchange(String currencyFrom, String currencyTo, BigDecimal currencyMultiplier) {
+        this.currencyFrom = currencyFrom;
+        this.currencyTo = currencyTo;
+        this.currencyMultiplier = currencyMultiplier;
     }
 
-    public String getEnvironment() {
-        return environment;
+    public CurrencyExchange() {
+
     }
 
-    public Long getId() {
-        return id;
+    public String getCurrencyFrom() {
+        return currencyFrom;
     }
 
-    public String getFrom() {
-        return from;
+    public String getCurrencyTo() {
+        return currencyTo;
     }
 
-    public String getTo() {
-        return to;
-    }
-
-    public BigDecimal getConversionMultiple() {
-        return conversionMultiple;
+    public BigDecimal getCurrencyMultiplier() {
+        return currencyMultiplier;
     }
 
     @Override
@@ -55,11 +46,11 @@ public class CurrencyExchange { //FIXME equals/hashcode wywalic settery
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CurrencyExchange that = (CurrencyExchange) o;
-        return Objects.equals(id, that.id) && Objects.equals(from, that.from) && Objects.equals(to, that.to) && Objects.equals(conversionMultiple, that.conversionMultiple) && Objects.equals(environment, that.environment);
+        return Objects.equals(id, that.id) && Objects.equals(currencyFrom, that.currencyFrom) && Objects.equals(currencyTo, that.currencyTo) && Objects.equals(currencyMultiplier, that.currencyMultiplier);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, from, to, conversionMultiple, environment);
+        return Objects.hash(id, currencyFrom, currencyTo, currencyMultiplier);
     }
 }

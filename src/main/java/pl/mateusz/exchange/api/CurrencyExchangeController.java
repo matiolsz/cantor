@@ -1,37 +1,34 @@
-package pl.mateusz.currencyexchangeservice.api;
+package pl.mateusz.exchange.api;
 
-import pl.mateusz.currencyexchangeservice.model.CurrencyExchange;
-import com.microservices.currencyexchangeservice.service.CurrencyExchangeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import pl.mateusz.exchange.model.CurrencyExchange;
+import pl.mateusz.exchange.service.CurrencyExchangeService;
 
-import java.math.BigDecimal;
+import javax.persistence.EntityNotFoundException;
 
 @RestController
 public class CurrencyExchangeController {
 
-    @Autowired  //FIXME - brakuje servisu
-    private CurrencyExchangeRepository currencyExchangeRepository;
+   private CurrencyExchangeService currencyExchangeService;
 
-    @Autowired
-    private Environment environment;
+   public CurrencyExchangeController(CurrencyExchangeService currencyExchangeService) {
+       this.currencyExchangeService = currencyExchangeService;
+   }
 
     @GetMapping("/currency-exchange/{from}/{to}")
-    public CurrencyExchange retrieveExchangeValue(
+    public CurrencyExchange retrieveCurrencyExchangeEntityWithValue(
             @PathVariable String from,
             @PathVariable String to) {
-
-        //FIXME
-
-        CurrencyExchange currencyExchange = currencyExchangeRepository.findByFromAndTo(from, to);
-        if (currencyExchange == null) {
-            throw new RuntimeException("Unable to find data for " + from + " to " + to);
-        }
-
-        return new CurrencyExchange(1000L, from, to, BigDecimal.valueOf(50), environment.getProperty("local.server.port"));
+    return currencyExchangeService.exchangeCurrency(from, to);
     }
 
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<String> handlyMyCustomException(EntityNotFoundException e) {
+        return new ResponseEntity<>("Something happened: " + e.getMessage(), HttpStatus.NOT_FOUND);
+    }
 }

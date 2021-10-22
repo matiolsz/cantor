@@ -1,4 +1,4 @@
-package pl.mateusz.currencyexchangeservice;
+package pl.mateusz.exchange;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
