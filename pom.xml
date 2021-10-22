@@ -11,11 +11,11 @@
 
     <!--    <groupId>pl.mateusz</groupId>-->
     <groupId>pl.mateusz</groupId>
-    <artifactId>exchange</artifactId>
+    <artifactId>currency-exchange</artifactId>
     <!--    <artifactId>exchange</artifactId>-->
     <version>0.0.1-SNAPSHOT</version>
-    <name>currency-exchange-service</name>
-    <description>?</description>
+    <name>cantor</name>
+    <description>Currency exchange API</description>
 
     <properties>
         <java.version>16</java.version>

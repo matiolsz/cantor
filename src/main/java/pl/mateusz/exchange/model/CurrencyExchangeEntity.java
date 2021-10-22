@@ -3,11 +3,10 @@ package pl.mateusz.exchange.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
-public class CurrencyExchange {
+public class CurrencyExchangeEntity {
 
     @Id
     @GeneratedValue
@@ -17,15 +16,15 @@ public class CurrencyExchange {
 
     private String currencyTo;
 
-    private BigDecimal currencyMultiplier;
+    private Double currencyMultiplier;
 
-    public CurrencyExchange(String currencyFrom, String currencyTo, BigDecimal currencyMultiplier) {
+    public CurrencyExchangeEntity(String currencyFrom, String currencyTo, Double currencyMultiplier) {
         this.currencyFrom = currencyFrom;
         this.currencyTo = currencyTo;
         this.currencyMultiplier = currencyMultiplier;
     }
 
-    public CurrencyExchange() {
+    public CurrencyExchangeEntity() {
 
     }
 
@@ -37,7 +36,7 @@ public class CurrencyExchange {
         return currencyTo;
     }
 
-    public BigDecimal getCurrencyMultiplier() {
+    public Double getCurrencyMultiplier() {
         return currencyMultiplier;
     }
 
@@ -45,7 +44,7 @@ public class CurrencyExchange {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CurrencyExchange that = (CurrencyExchange) o;
+        CurrencyExchangeEntity that = (CurrencyExchangeEntity) o;
         return Objects.equals(id, that.id) && Objects.equals(currencyFrom, that.currencyFrom) && Objects.equals(currencyTo, that.currencyTo) && Objects.equals(currencyMultiplier, that.currencyMultiplier);
     }
 
