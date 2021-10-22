@@ -1,8 +1,9 @@
 package pl.mateusz.exchange.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import pl.mateusz.exchange.model.values.Currency;
+
+import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
@@ -12,13 +13,15 @@ public class CurrencyExchangeEntity {
     @GeneratedValue
     private Long id;
 
-    private String currencyFrom;
+    @Enumerated(EnumType.STRING)
+    private Currency currencyFrom;
 
-    private String currencyTo;
+    @Enumerated(EnumType.STRING)
+    private Currency currencyTo;
 
-    private Double currencyMultiplier;
+    private BigDecimal currencyMultiplier;
 
-    public CurrencyExchangeEntity(String currencyFrom, String currencyTo, Double currencyMultiplier) {
+    public CurrencyExchangeEntity(Currency currencyFrom, Currency currencyTo, BigDecimal currencyMultiplier) {
         this.currencyFrom = currencyFrom;
         this.currencyTo = currencyTo;
         this.currencyMultiplier = currencyMultiplier;
@@ -28,15 +31,15 @@ public class CurrencyExchangeEntity {
 
     }
 
-    public String getCurrencyFrom() {
+    public Currency getCurrencyFrom() {
         return currencyFrom;
     }
 
-    public String getCurrencyTo() {
+    public Currency getCurrencyTo() {
         return currencyTo;
     }
 
-    public Double getCurrencyMultiplier() {
+    public BigDecimal getCurrencyMultiplier() {
         return currencyMultiplier;
     }
 

@@ -4,8 +4,10 @@ import org.springframework.stereotype.Service;
 import pl.mateusz.exchange.dao.CurrencyExchangeRepository;
 import pl.mateusz.exchange.model.CurrencyExchangeEntity;
 import pl.mateusz.exchange.model.dto.CurrencyExchangeDTO;
+import pl.mateusz.exchange.model.values.Currency;
 
 import javax.persistence.EntityNotFoundException;
+import java.math.BigDecimal;
 
 
 @Service
@@ -17,12 +19,12 @@ public class CurrencyExchangeService {
         this.currencyExchangeRepository = currencyExchangeRepository;
     }
 
-    public CurrencyExchangeDTO exchangeCurrency(Double amount, String from, String to) {
+    public CurrencyExchangeDTO exchangeCurrency(BigDecimal amount, Currency from, Currency to) {
         CurrencyExchangeEntity currencyExchangeEntity = currencyExchangeRepository.findByCurrencyFromAndAndCurrencyTo(from, to);
         if (currencyExchangeEntity == null) {
             throw new EntityNotFoundException("This currency exchange is not possible.");
         }
-        return CurrencyExchangeDTO.giveMeCurrencyExchangeDTO(currencyExchangeEntity.getCurrencyMultiplier()*amount);
+        return CurrencyExchangeDTO.giveMeCurrencyExchangeDTO(currencyExchangeEntity.getCurrencyMultiplier().multiply(amount));
 
     }
 }

@@ -2,19 +2,21 @@ package pl.mateusz.exchange.model.dto;
 
 import pl.mateusz.exchange.model.CurrencyExchangeEntity;
 
+import java.math.BigDecimal;
+
 public class CurrencyExchangeDTO {
 
-    final Double result;
+    final BigDecimal result;
 
-    private CurrencyExchangeDTO(Double result) {
+    private CurrencyExchangeDTO(BigDecimal result) {
         this.result = result;
     }
 
-    public static CurrencyExchangeDTO giveMeCurrencyExchangeDTO(Double result) {
+    public static CurrencyExchangeDTO giveMeCurrencyExchangeDTO(BigDecimal result) {
         return new CurrencyExchangeDTO(result);
     }
 
-    public Double getResult() {
+    public BigDecimal getResult() {
         return result;
     }
 }
