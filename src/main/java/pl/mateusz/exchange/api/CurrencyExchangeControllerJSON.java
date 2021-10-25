@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.mateusz.exchange.model.dto.AmountAndCurrencies;
 import pl.mateusz.exchange.model.dto.CurrencyExchangeDTO;
 import pl.mateusz.exchange.service.CurrencyExchangeService;
+import pl.mateusz.exchange.service.SaveIntoAFileService;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -15,12 +16,16 @@ public class CurrencyExchangeControllerJSON {
 
     private CurrencyExchangeService currencyExchangeService;
 
-    private CurrencyExchangeControllerJSON(CurrencyExchangeService currencyExchangeService) {
+    private SaveIntoAFileService saveIntoAFileService;
+
+    private CurrencyExchangeControllerJSON(CurrencyExchangeService currencyExchangeService,SaveIntoAFileService saveIntoAFileService) {
         this.currencyExchangeService = currencyExchangeService;
+        this.saveIntoAFileService = saveIntoAFileService;
     }
 
     @GetMapping(consumes = "application/json", produces = "application/json")
         public CurrencyExchangeDTO giveMeAValueAfterExchange(@RequestBody AmountAndCurrencies amountAndCurrencies) {
+        saveIntoAFileService.createAFile();
         return currencyExchangeService.exchangeCurrency(
                 amountAndCurrencies.getAmount(),
                 amountAndCurrencies.getCurrencyFrom(),
