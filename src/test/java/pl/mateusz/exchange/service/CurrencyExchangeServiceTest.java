@@ -6,7 +6,7 @@
 //import org.junit.Test;
 //import org.junit.runner.RunWith;
 //import org.springframework.test.context.junit4.SpringRunner;
-//import pl.mateusz.exchange.dao.CurrencyExchangeRepository;
+//import pl.mateusz.exchange.service.CurrencyExchangeRepository;
 //import pl.mateusz.exchange.model.CurrencyExchange;
 //
 //import java.math.BigDecimal;

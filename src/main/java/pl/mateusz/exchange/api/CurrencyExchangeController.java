@@ -2,10 +2,8 @@ package pl.mateusz.exchange.api;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import pl.mateusz.exchange.model.dto.AmountAndCurrencies;
 import pl.mateusz.exchange.model.dto.CurrencyExchangeDTO;
 import pl.mateusz.exchange.model.values.Currency;
 import pl.mateusz.exchange.service.CurrencyExchangeService;
@@ -28,6 +26,15 @@ public class CurrencyExchangeController {
             @PathVariable Currency from,
             @PathVariable Currency to) {
     return currencyExchangeService.exchangeCurrency(amount,from, to);
+    }
+
+
+    @GetMapping(consumes = "application/json", produces = "application/json")
+    public CurrencyExchangeDTO giveMeAValueAfterExchange(@RequestBody AmountAndCurrencies amountAndCurrencies) {
+        return currencyExchangeService.exchangeCurrency(
+                amountAndCurrencies.getAmount(),
+                amountAndCurrencies.getCurrencyFrom(),
+                amountAndCurrencies.getCurrencyTo());
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
