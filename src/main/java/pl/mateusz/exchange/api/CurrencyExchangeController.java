@@ -3,8 +3,8 @@ package pl.mateusz.exchange.api;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.mateusz.exchange.model.dto.AmountAndCurrencies;
-import pl.mateusz.exchange.model.dto.CurrencyExchangeDTO;
+import pl.mateusz.exchange.model.dto.UserInputObject;
+import pl.mateusz.exchange.model.dto.CurrencyExchange;
 import pl.mateusz.exchange.model.values.Currency;
 import pl.mateusz.exchange.service.CurrencyExchangeService;
 
@@ -21,20 +21,16 @@ public class CurrencyExchangeController {
    }
 
     @GetMapping("/currency-exchange/{amount}/{from}/{to}")
-    public CurrencyExchangeDTO retrieveCurrencyExchangeEntityWithValue(
+    public CurrencyExchange retrieveCurrencyExchangeEntityWithValue(
             @PathVariable BigDecimal amount,
             @PathVariable Currency from,
             @PathVariable Currency to) {
-    return currencyExchangeService.exchangeCurrency(amount,from, to);
+    return currencyExchangeService.exchangeCurrency(new UserInputObject(amount,from,to));
     }
 
-
     @GetMapping(consumes = "application/json", produces = "application/json")
-    public CurrencyExchangeDTO giveMeAValueAfterExchange(@RequestBody AmountAndCurrencies amountAndCurrencies) {
-        return currencyExchangeService.exchangeCurrency(
-                amountAndCurrencies.getAmount(),
-                amountAndCurrencies.getCurrencyFrom(),
-                amountAndCurrencies.getCurrencyTo());
+    public CurrencyExchange giveMeAValueAfterExchange(@RequestBody UserInputObject jsonBody) {
+        return currencyExchangeService.exchangeCurrency(jsonBody);
     }
 
     @ExceptionHandler(EntityNotFoundException.class)

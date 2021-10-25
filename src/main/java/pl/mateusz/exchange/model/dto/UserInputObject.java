@@ -4,7 +4,7 @@ import pl.mateusz.exchange.model.values.Currency;
 
 import java.math.BigDecimal;
 
-public class AmountAndCurrencies {
+public class UserInputObject {
 
     private BigDecimal amount;
 
@@ -12,10 +12,10 @@ public class AmountAndCurrencies {
 
     private Currency currencyTo;
 
-    public AmountAndCurrencies() {
+    public UserInputObject() {
     }
 
-    public AmountAndCurrencies(BigDecimal amount, Currency currencyFrom, Currency currencyTo) {
+    public UserInputObject(BigDecimal amount, Currency currencyFrom, Currency currencyTo) {
         this.amount = amount;
         this.currencyFrom = currencyFrom;
         this.currencyTo = currencyTo;
