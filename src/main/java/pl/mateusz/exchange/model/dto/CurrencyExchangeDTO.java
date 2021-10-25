@@ -1,7 +1,5 @@
 package pl.mateusz.exchange.model.dto;
 
-import pl.mateusz.exchange.model.CurrencyExchangeEntity;
-
 import java.math.BigDecimal;
 
 public class CurrencyExchangeDTO {
