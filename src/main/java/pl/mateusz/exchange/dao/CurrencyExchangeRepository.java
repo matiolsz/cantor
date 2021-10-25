@@ -8,8 +8,6 @@ import pl.mateusz.exchange.model.values.Currency;
 @Repository
 public interface CurrencyExchangeRepository extends JpaRepository<CurrencyExchangeEntity, Long> {
 
-//    CurrencyExchangeEntity findFirstByCurrencyFromAndCurrencyTo(String from, String to);
-
     CurrencyExchangeEntity findByCurrencyFromAndAndCurrencyTo(Currency from, Currency to);
 
 }

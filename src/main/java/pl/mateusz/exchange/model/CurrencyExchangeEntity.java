@@ -28,7 +28,6 @@ public class CurrencyExchangeEntity {
     }
 
     public CurrencyExchangeEntity() {
-
     }
 
     public Currency getCurrencyFrom() {
