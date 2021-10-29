@@ -12,6 +12,7 @@ import javax.persistence.EntityNotFoundException;
 import java.math.BigDecimal;
 
 @RestController
+@RequestMapping("/currency-exchange")
 public class CurrencyExchangeController {
 
    private final CurrencyExchangeService currencyExchangeService;
@@ -20,8 +21,13 @@ public class CurrencyExchangeController {
        this.currencyExchangeService = currencyExchangeService;
    }
 
-    @GetMapping("/currency-exchange/{amount}/{from}/{to}")
-    public CurrencyExchange retrieveCurrencyExchangeEntityWithValue(
+   @GetMapping
+   public String hello(){
+       return "hello";
+   }
+
+    @GetMapping("/{amount}/{from}/{to}")
+    public CurrencyExchange createFromParameters(
             @PathVariable BigDecimal amount,
             @PathVariable Currency from,
             @PathVariable Currency to) {
@@ -29,7 +35,7 @@ public class CurrencyExchangeController {
     }
 
     @GetMapping(consumes = "application/json", produces = "application/json")
-    public CurrencyExchange giveMeAValueAfterExchange(@RequestBody UserInputObject jsonBody) {
+    public CurrencyExchange createFromJson(@RequestBody UserInputObject jsonBody) {
         return currencyExchangeService.exchangeCurrency(jsonBody);
     }
 

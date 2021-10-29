@@ -10,11 +10,18 @@ public class CurrencyExchange {
         this.result = result;
     }
 
-    public static CurrencyExchange giveMeCurrencyExchangeDTO(BigDecimal result) {
+    public static CurrencyExchange of(BigDecimal result) {
         return new CurrencyExchange(result);
     }
 
     public BigDecimal getResult() {
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "CurrencyExchange{" +
+                "result=" + result +
+                '}';
     }
 }

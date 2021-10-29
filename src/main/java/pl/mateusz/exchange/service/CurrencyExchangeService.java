@@ -21,6 +21,6 @@ public class CurrencyExchangeService {
         if (currencyExchangeEntity == null) {
             throw new EntityNotFoundException("This currency exchange is not possible.");
         }
-        return CurrencyExchange.giveMeCurrencyExchangeDTO(currencyExchangeEntity.getCurrencyMultiplier().multiply(jsonBody.getAmount()));
+        return CurrencyExchange.of(currencyExchangeEntity.getCurrencyMultiplier().multiply(jsonBody.getAmount()));
     }
 }
