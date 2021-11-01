@@ -4,9 +4,14 @@ import java.math.BigDecimal;
 
 public class CurrencyExchange {
 
-    final BigDecimal result;
+    // zaproponowales aby bylo final ale nie bylem w stanie napisac testow gdy result bylo final
+    private BigDecimal result;
 
-    private CurrencyExchange(BigDecimal result) {
+    public CurrencyExchange() {
+    }
+
+    // zaproponowales aby bylo final ale nie bylem w stanie napisac testow gdy result bylo final
+    public CurrencyExchange(BigDecimal result) {
         this.result = result;
     }
 

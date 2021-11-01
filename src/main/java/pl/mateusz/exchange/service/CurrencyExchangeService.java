@@ -17,7 +17,8 @@ public class CurrencyExchangeService {
     }
 
     public CurrencyExchange exchangeCurrency(UserInputObject jsonBody) {
-        CurrencyExchangeEntity currencyExchangeEntity = currencyExchangeRepository.findByCurrencyFromAndAndCurrencyTo(jsonBody.getCurrencyFrom(), jsonBody.getCurrencyTo());
+        CurrencyExchangeEntity currencyExchangeEntity = currencyExchangeRepository
+                .findByCurrencyFromAndAndCurrencyTo(jsonBody.getCurrencyFrom(), jsonBody.getCurrencyTo());
         if (currencyExchangeEntity == null) {
             throw new EntityNotFoundException("This currency exchange is not possible.");
         }

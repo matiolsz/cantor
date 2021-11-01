@@ -21,7 +21,7 @@ public class CurrencyExchangeController {
        this.currencyExchangeService = currencyExchangeService;
    }
 
-   @GetMapping
+   @GetMapping("/hello")
    public String hello(){
        return "hello";
    }

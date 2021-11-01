@@ -1,49 +1,43 @@
 package pl.mateusz.exchange.service;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import pl.mateusz.exchange.model.CurrencyExchangeEntity;
 import pl.mateusz.exchange.model.dto.CurrencyExchange;
 import pl.mateusz.exchange.model.dto.UserInputObject;
+import pl.mateusz.exchange.model.values.Currency;
 
 import java.math.BigDecimal;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
-import static pl.mateusz.exchange.model.values.Currency.PLN;
-import static pl.mateusz.exchange.model.values.Currency.USD;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class CurrencyExchangeServiceTest {
 
-    private final CurrencyExchangeRepository repository = mock(CurrencyExchangeRepository.class);
-    private CurrencyExchangeService currencyExchangeService;
+    @InjectMocks
+    CurrencyExchangeService service;
 
-    @Before
-    public void setup() {
-        currencyExchangeService = new CurrencyExchangeService(repository);
-    }
-
-    @After
-    public void end() {
-        currencyExchangeService = null;
-    }
+    @Mock
+    CurrencyExchangeRepository dao;
 
     @Test
-    public void checkIfExchangeIsCorrectWhenAssertingTwoSameObjects() {
-        when(repository.findByCurrencyFromAndAndCurrencyTo(PLN, USD))
-                .thenReturn(
-                        new CurrencyExchangeEntity(PLN, USD, BigDecimal.valueOf(4))
-                );
-        Assert.assertEquals(currencyExchangeService.exchangeCurrency(new UserInputObject(BigDecimal.valueOf(100),PLN, USD)),
-                new CurrencyExchangeEntity(PLN, USD, BigDecimal.valueOf(4)));
+    public void serviceShouldMakeCorrectLogicWhenMethodInvoked() {
+    //given
+        CurrencyExchangeEntity currencyExchangeEntity =
+                new CurrencyExchangeEntity(Currency.PLN,Currency.EUR,new BigDecimal("0.22"));
+    //when
+        when(dao.findByCurrencyFromAndAndCurrencyTo(Currency.PLN, Currency.EUR))
+                .thenReturn(currencyExchangeEntity);
+
+        CurrencyExchange currencyExchange =
+                service.exchangeCurrency(
+                        new UserInputObject(BigDecimal.valueOf(100),Currency.PLN,Currency.EUR));
+    //then
+        assertEquals(currencyExchange.getResult(),new BigDecimal("22.00"));
     }
-
-
 
 }
