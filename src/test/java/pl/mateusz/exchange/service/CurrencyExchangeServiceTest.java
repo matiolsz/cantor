@@ -7,7 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pl.mateusz.exchange.model.CurrencyExchangeEntity;
 import pl.mateusz.exchange.model.dto.CurrencyExchange;
-import pl.mateusz.exchange.model.dto.UserInputObject;
+import pl.mateusz.exchange.model.dto.UserInput;
 import pl.mateusz.exchange.model.values.Currency;
 
 import java.math.BigDecimal;
@@ -35,7 +35,7 @@ public class CurrencyExchangeServiceTest {
 
         CurrencyExchange currencyExchange =
                 service.exchangeCurrency(
-                        new UserInputObject(BigDecimal.valueOf(100),Currency.PLN,Currency.EUR));
+                        new UserInput(BigDecimal.valueOf(100),Currency.PLN,Currency.EUR));
     //then
         assertEquals(currencyExchange.getResult(),new BigDecimal("22.00"));
     }

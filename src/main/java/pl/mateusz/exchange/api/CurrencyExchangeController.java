@@ -3,7 +3,7 @@ package pl.mateusz.exchange.api;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.mateusz.exchange.model.dto.UserInputObject;
+import pl.mateusz.exchange.model.dto.UserInput;
 import pl.mateusz.exchange.model.dto.CurrencyExchange;
 import pl.mateusz.exchange.model.values.Currency;
 import pl.mateusz.exchange.service.CurrencyExchangeService;
@@ -31,12 +31,12 @@ public class CurrencyExchangeController {
             @PathVariable BigDecimal amount,
             @PathVariable Currency from,
             @PathVariable Currency to) {
-    return currencyExchangeService.exchangeCurrency(new UserInputObject(amount,from,to));
+    return currencyExchangeService.exchangeCurrency(new UserInput(amount,from,to));
     }
 
     @GetMapping(consumes = "application/json", produces = "application/json")
-    public CurrencyExchange createFromJson(@RequestBody UserInputObject jsonBody) {
-        return currencyExchangeService.exchangeCurrency(jsonBody);
+    public CurrencyExchange createFromJson(@RequestBody UserInput userInput) {
+        return currencyExchangeService.exchangeCurrency(userInput);
     }
 
     @ExceptionHandler(EntityNotFoundException.class)

@@ -3,7 +3,7 @@ package pl.mateusz.exchange.service;
 import org.springframework.stereotype.Service;
 import pl.mateusz.exchange.model.CurrencyExchangeEntity;
 import pl.mateusz.exchange.model.dto.CurrencyExchange;
-import pl.mateusz.exchange.model.dto.UserInputObject;
+import pl.mateusz.exchange.model.dto.UserInput;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -16,7 +16,7 @@ public class CurrencyExchangeService {
         this.currencyExchangeRepository = currencyExchangeRepository;
     }
 
-    public CurrencyExchange exchangeCurrency(UserInputObject jsonBody) {
+    public CurrencyExchange exchangeCurrency(UserInput jsonBody) {
         CurrencyExchangeEntity currencyExchangeEntity = currencyExchangeRepository
                 .findByCurrencyFromAndAndCurrencyTo(jsonBody.getCurrencyFrom(), jsonBody.getCurrencyTo());
         if (currencyExchangeEntity == null) {

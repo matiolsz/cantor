@@ -10,8 +10,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import pl.mateusz.exchange.model.CurrencyExchangeEntity;
-import pl.mateusz.exchange.model.dto.UserInputObject;
+import pl.mateusz.exchange.model.dto.UserInput;
 
 import java.math.BigDecimal;
 import java.nio.charset.Charset;
@@ -44,7 +43,7 @@ public class ControllerTest {
     @Test
     public void responseIsCorrectWhenJsonRequestIsSend() throws Exception {
         String url = "http://localhost:8080/currency-exchange";
-        UserInputObject userInputObject = new UserInputObject(
+        UserInput userInputObject = new UserInput(
                 BigDecimal.valueOf(100), PLN, EUR);
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
